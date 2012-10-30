@@ -37,11 +37,13 @@ parse_git_branch ()
 { 
     local b="$(git symbolic-ref HEAD 2>/dev/null)";
     if [ -n "$b" ]; then
-        printf " $txtred|$bldylw%s$txtred|" "${b##refs/heads/}";
+        printf " [%s]" "${b##refs/heads/}";
     fi
 }
 
-
+# Prompt
+#export PS1="(\A) $txtgrn\w$(parse_git_branch) $txtgrn\$$txtrst " 
+export PS1="(\A) \[\033[0;35m\] \w\[\033[0;31m\]\$(parse_git_branch) \[\033[m\]\$ "
 ###### EXPORTS ######
 #####################
 
@@ -52,7 +54,7 @@ export EDITOR=/usr/bin/vim   #default editor. could be pico, nano, vim, or emacs
 export HISTCONTROL=ignoredups       #ignore duplicates in history
 
 export PATH="$HOME/bin:$PATH"
-source ~/bin/git-completion.bash
+#source ~/bin/git-completion.bash
 
 ###### Basic Aliases ######
 ###########################
@@ -156,5 +158,3 @@ export PATH
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-# Prompt
-export PS1="(\A) $txtgrn\w\$(parse_git_branch) $txtgrn\$$txtrst " 
