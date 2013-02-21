@@ -151,6 +151,13 @@ decrypt()
     fi
 }
 
+# Change Title of a Window
+func_title() {
+ echo -n -e "\033]0;$1\007"
+}
+
+alias  title="func_title"
+
 # Setting PATH for Python 3.2
 # The orginal version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/3.2/bin:${PATH}"
